@@ -19,7 +19,7 @@ cd web-app && npm start
 ## Configuration
 - Port: 5000
 - Host: 0.0.0.0
-- All hosts allowed for Replit proxy compatibility
+- Allowed hosts: `.replit.dev`, `.picard.replit.dev` (for Replit proxy)
 
 ## Project Architecture
 - Frontend framework: Angular 20
