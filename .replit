@@ -1,0 +1,44 @@
+modules = ["web", "nodejs-20"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Angular Frontend"
+
+[[workflows.workflow]]
+name = "Angular Frontend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd web-app && npm start"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["bash", "-c", "cd web-app && node dist/web-app/server/server.mjs"]
+build = ["bash", "-c", "cd web-app && npm install && npm run build"]
+
+[userenv]
+
+[userenv.production]
+PORT = "5000"
